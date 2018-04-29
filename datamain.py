@@ -6,8 +6,8 @@ import operator
 def load():
 
 #loading the files into movies and ratings...
-	movies = pd.read_csv('./movies.csv', sep=',')
-	ratings = pd.read_csv('./ratings.csv', sep=',')
+	movies = pd.read_csv('./data/movies.csv', sep=',')
+	ratings = pd.read_csv('.data//ratings.csv', sep=',')
 
 #----
 #initialising no of users and movies here----
@@ -37,7 +37,7 @@ def load():
 
 
 	print("Enter the userId to be searched")
-	a=int(raw_input())
+	a=int(input())
 	if(a<=num_users):
 
 #---generating a list of genres, movie IDs, Ratings and also Titles---
@@ -128,7 +128,7 @@ if __name__ == '__main__':
 	print("Do you want to create a new userId or not")
 	print("y/n")
 
-	a=str(raw_input())
+	a=str(input())
 	if(a=='n' or a=='N'):
 		load()
 	else:

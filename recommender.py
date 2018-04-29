@@ -22,6 +22,8 @@ class Recommender:
         self.movieId = list(self.graph.movies.movieId)
         self.movieTitles = list(self.graph.movies.title)
 
+        self.movieDict = dict(zip(self.movieId, self.movieTitles))
+        
         self.genreDict = {}
         self.genreRateAccumulator = {}
 
@@ -95,6 +97,7 @@ class Recommender:
 
 def main():
     graph = Graph(args["movie_path"], args["ratings_path"])
+
     graph.constructGraph()
 
     rec = Recommender(graph, 250)
@@ -103,7 +106,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
             
 
         

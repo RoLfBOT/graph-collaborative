@@ -1,15 +1,15 @@
 import numpy as np 
-# from recommender import Recommender
-# from dataset import Graph
-# from search import searchTrie
+from recommender import Recommender
+from dataset import Graph
+from search import searchTrie
 import argparse
 import operator
 
-# ap = argparse.ArgumentParser()
-# ap.add_argument("-m", "--movie_path", required = True, help = "Path to movies.csv directory")
-# ap.add_argument("-r", "--ratings_path", required = True, help = "Path to ratings.csv directory")
+ap = argparse.ArgumentParser()
+ap.add_argument("-m", "--movie_path", required = True, help = "Path to movies.csv directory")
+ap.add_argument("-r", "--ratings_path", required = True, help = "Path to ratings.csv directory")
 
-# args = vars(ap.parse_args())
+args = vars(ap.parse_args())
 
 class User:
     
@@ -40,7 +40,10 @@ class User:
 
 
 def main():
-    
+
+    graph = Graph(args["movie_path"], args["ratings_path"])
+    graph.constructGraph()
+
     print("")
     print("Are you a new user [y/n]: ")
 
@@ -50,16 +53,19 @@ def main():
         print("Enter your name: ")
         name = str(input())
         user = User(name)
+        recommender = Recommender(graph, user.userId)
+        recommender.addUserToGraph()
     
     else:
         print("Enter your userId: ")
+        userId = int(input())
         print("Enter your name: ")
         name = str(input())
-        userId = int(input())
         user = User(name, userId, new = False)
+        recommender = Recommender(graph, user.userId)
 
-    
-
+    print("Here are some recommendations for you\n")
+    recommender.recommend()
 
 if __name__ == '__main__':
     main()

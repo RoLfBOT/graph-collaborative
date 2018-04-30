@@ -3,11 +3,11 @@ import numpy as np
 import argparse
 import operator
 
-ap = argparse.ArgumentParser()
-ap.add_argument("-m", "--movie_path", required = True, help = "Path to movies.csv directory")
-ap.add_argument("-r", "--ratings_path", required = True, help = "Path to ratings.csv directory")
+# ap = argparse.ArgumentParser()
+# ap.add_argument("-m", "--movie_path", required = True, help = "Path to movies.csv directory")
+# ap.add_argument("-r", "--ratings_path", required = True, help = "Path to ratings.csv directory")
 
-args = vars(ap.parse_args())
+# args = vars(ap.parse_args())
 
 class Recommender:
 
@@ -95,17 +95,17 @@ class Recommender:
                 counter[4] = counter[4] + 1
 
 
-def main():
-    graph = Graph(args["movie_path"], args["ratings_path"])
+# def main():
+#     graph = Graph(args["movie_path"], args["ratings_path"])
 
-    graph.constructGraph()
+#     graph.constructGraph()
 
-    rec = Recommender(graph, 250)
+#     rec = Recommender(graph, 250)
 
-    rec.recommend()
+#     rec.recommend()
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
             
 
         

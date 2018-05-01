@@ -33,7 +33,7 @@ class User:
         else:
             self.userId = userId
 
-    def rateMovie(self, movie):
+    def watchAndrateMovie(self, movie):
         print(movie + "-- rate on a scale of 1 - 5: ")
     
     # def searchMovie(self, searchTrieObj):

@@ -1,13 +1,6 @@
-from dataset import Graph
 import numpy as np 
 import argparse
 import operator
-
-# ap = argparse.ArgumentParser()
-# ap.add_argument("-m", "--movie_path", required = True, help = "Path to movies.csv directory")
-# ap.add_argument("-r", "--ratings_path", required = True, help = "Path to ratings.csv directory")
-
-# args = vars(ap.parse_args())
 
 class Recommender:
 
@@ -61,6 +54,9 @@ class Recommender:
     #-----recommend function-----#
     def recommend(self):
         
+        self.recommendDict = {}
+        self.recommendDict.clear()
+
         self.makeGenreDict()
 
         self.top5Genres = []
@@ -75,40 +71,32 @@ class Recommender:
         for k in range(len(self.movieTitles)):
             
             if(self.top5Genres[0] in self.genres[k] and counter[0] <= 2 and self.graph.bipartiteGraph[self.userId][k] == 0):
-                print(self.movieTitles[k])
+                # print(self.movieTitles[k])
+                self.recommendDict[self.movieId[k]] = self.movieTitles[k]
                 counter[0] = counter[0] + 1
 
             if(self.top5Genres[1] in self.genres[k] and counter[1] <= 2 and self.graph.bipartiteGraph[self.userId][k] == 0):
-                print(self.movieTitles[k])
+                # print(self.movieTitles[k])
+                self.recommendDict[self.movieId[k]] = self.movieTitles[k]
                 counter[1] = counter[1] + 1
 
             if(self.top5Genres[2] in self.genres[k] and counter[2] <= 2 and self.graph.bipartiteGraph[self.userId][k] == 0):
-                print(self.movieTitles[k])
+                # print(self.movieTitles[k])
+                self.recommendDict[self.movieId[k]] = self.movieTitles[k]
                 counter[2] = counter[2] + 1
 
             if(self.top5Genres[3] in self.genres[k] and counter[3] <= 2 and self.graph.bipartiteGraph[self.userId][k] == 0):
-                print(self.movieTitles[k])
+                # print(self.movieTitles[k])
+                self.recommendDict[self.movieId[k]] = self.movieTitles[k]
                 counter[3] = counter[3] + 1
 
             if(self.top5Genres[4] in self.genres[k] and counter[4] <= 2 and self.graph.bipartiteGraph[self.userId][k] == 0):
-                print(self.movieTitles[k])
+                # print(self.movieTitles[k])
+                self.recommendDict[self.movieId[k]] = self.movieTitles[k]
                 counter[4] = counter[4] + 1
-
-
-# def main():
-#     graph = Graph(args["movie_path"], args["ratings_path"])
-
-#     graph.constructGraph()
-
-#     rec = Recommender(graph, 250)
-
-#     rec.recommend()
-
-# if __name__ == '__main__':
-#     main()
-            
-
         
+        for key, value in self.recommendDict.items():
+            print(str(key) + " " + value + '\n')
 
         
 

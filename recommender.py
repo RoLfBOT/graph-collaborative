@@ -96,9 +96,8 @@ class Recommender:
                 counter[4] = counter[4] + 1
         
         for key, value in self.recommendDict.items():
-            print(str(key) + " " + value + '\n')
+            print(str(key) + " " + value + '\n')   
 
-        
-
-
+    def saveMatrixToNumpyFile(self):
+        np.save('./numpy-file/ratingMatrix.npy', self.graph.bipartiteGraph)
 

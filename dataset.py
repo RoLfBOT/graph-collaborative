@@ -1,6 +1,7 @@
 #dependencies
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
 #main class
 class Graph:
@@ -14,6 +15,8 @@ class Graph:
         self.ratings = self.ratings[self.ratings['movieId'] < 1000]
         self.movies = self.movies[self.movies['movieId'] < 1000]
 
+    def bipartiteGraphUserMovie(self):
+        
         users = list(self.ratings.userId.unique())
         movies = list(self.movies.movieId.unique())
 
@@ -21,9 +24,7 @@ class Graph:
         num_movies = len(movies)
 
         self.bipartiteGraph = np.zeros((num_users, num_movies))
-
-    def bipartiteGraphUserMovie(self):
-
+        
         users = list(self.ratings.userId.unique())
         movies = list(self.movies.movieId.unique())
         
@@ -35,4 +36,14 @@ class Graph:
             self.bipartiteGraph[user_index, movie_index] = group[["rating"]].values[0,0] 
 
     def constructGraph(self):
-        self.bipartiteGraphUserMovie()
+        matfile = Path('./numpy-file/ratingMatrix.npy')
+
+        if matfile.exists():
+            self.loadMatrixToNumpyFile()
+            print('loaded file\n')
+
+        else:
+            self.bipartiteGraphUserMovie()
+
+    def loadMatrixToNumpyFile(self):
+        self.bipartiteGraph = np.load('./numpy-file/ratingMatrix.npy') 

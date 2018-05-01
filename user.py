@@ -33,9 +33,11 @@ class User:
         else:
             self.userId = userId
 
-    def watchAndrateMovie(self, movie):
-        print(movie + "-- rate on a scale of 1 - 5: ")
-    
+    def watchAndrateMovie(self, movieId, recommender):
+        print(recommender.movieDict[movieId] + "-- rate on a scale of 1 - 5: ")
+        rating = int(input())
+        recommender.graph.bipartiteGraph[self.userId][movieId] = rating
+
     # def searchMovie(self, searchTrieObj):
 
 
@@ -66,6 +68,13 @@ def main():
 
     print("Here are some recommendations for you\n")
     recommender.recommend()
+
+    print("Enter movieId from above to watch and rate: ")
+    movieId = int(input())
+
+    user.watchAndrateMovie(movieId, recommender)
+
+    recommender.saveMatrixToNumpyFile()
 
 if __name__ == '__main__':
     main()

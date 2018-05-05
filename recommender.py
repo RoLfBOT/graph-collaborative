@@ -25,6 +25,7 @@ class Recommender:
 
         if(self.userId > self.graph.ratings["userId"].unique()[-1]):
             self.graph.bipartiteGraph = np.append(self.graph.bipartiteGraph, np.zeros((1, 807)), axis = 0)
+     
 
     #------genres dictionary------#
     def makeGenreDict(self):
@@ -32,7 +33,7 @@ class Recommender:
         num_movies = self.graph.movies["movieId"].unique().shape[0]
 
         for i in range(num_movies):
-            if(self.graph.bipartiteGraph[self.userId][i] > 0):
+            if(self.graph.bipartiteGraph[self.userId][i]>0):
                 g_movie = list(self.genres[i].split("|"))
 
                 for j in range(len(g_movie)):

@@ -46,11 +46,13 @@ class User:
                 if(k[0:len(keyword)].lower()== keyword):
                     ind = titles.index(k)
                     dict_ID[movieId[ind]]=k
-		
-        print("Choose your movies which you want to watch")
-
-        for key, value in dict_ID.items():
-            print(str(key) + " " + value + '\n')   
+            print("Choose your movies which you want to watch")
+            for key,values in dict_ID.items():
+                print(str(key) +  '\n')
+        else:
+            print("No such movie with this Keyword")
+            exit(0)
+        
 
 
 def main():
@@ -69,31 +71,37 @@ def main():
         user = User(name)
         recommender = Recommender(graph, user.userId)
         recommender.addUserToGraph()
+        trie = searchTrie(recommender.movieTitles)
+        print("Search for keyword: ")
+        keyword = str(input())
+        user.searchMovie(trie, keyword, recommender.movieTitles, recommender.movieId)
+        print("Enter movieId from above to watch and rate: ")
+        movieId = list(map(int,input().split(" ")))
+
+        for x in movieId:
+            user.watchAndrateMovie(x, recommender)
+        print("Here are some recommendations for you\n")
+        recommender.recommend()
+
+
+        recommender.saveMatrixToNumpyFile()
+        
+
     
     else:
-        print("Enter your userId: ")
+        print("Enter your userId(1 to 297): ")
         userId = int(input())
         print("Enter your name: ")
         name = str(input())
         user = User(name, userId, new = False)
         recommender = Recommender(graph, user.userId)
-
-    trie = searchTrie(recommender.movieTitles)
-    print("Search for keyword: ")
-    keyword = str(input())
-
-    user.searchMovie(trie, keyword, recommender.movieTitles, recommender.movieId)
+        print("Here are some recommendations for you\n")
+        recommender.recommend()
 
 
-    print("Here are some recommendations for you\n")
-    recommender.recommend()
+    
 
-    print("Enter movieId from above to watch and rate: ")
-    movieId = int(input())
-
-    user.watchAndrateMovie(movieId, recommender)
-
-    recommender.saveMatrixToNumpyFile()
+    
 
 if __name__ == '__main__':
     main()

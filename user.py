@@ -38,7 +38,19 @@ class User:
         rating = int(input())
         recommender.graph.bipartiteGraph[self.userId][movieId] = rating
 
-    # def searchMovie(self, searchTrieObj):
+    def searchMovie(self, searchTrieObj, keyword, titles, movieId):
+        found = searchTrieObj.search(keyword)
+        if(found):
+            dict_ID={}
+            for k in titles:
+                if(k[0:len(keyword)].lower()== keyword):
+                    ind = titles.index(k)
+                    dict_ID[movieId[ind]]=k
+		
+        print("Choose your movies which you want to watch")
+
+        for key, value in dict_ID.items():
+            print(str(key) + " " + value + '\n')   
 
 
 def main():
@@ -65,6 +77,13 @@ def main():
         name = str(input())
         user = User(name, userId, new = False)
         recommender = Recommender(graph, user.userId)
+
+    trie = searchTrie(recommender.movieTitles)
+    print("Search for keyword: ")
+    keyword = str(input())
+
+    user.searchMovie(trie, keyword, recommender.movieTitles, recommender.movieId)
+
 
     print("Here are some recommendations for you\n")
     recommender.recommend()

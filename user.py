@@ -48,7 +48,8 @@ class User:
                     dict_ID[movieId[ind]]=k
             print("Choose your movies which you want to watch")
             for key,values in dict_ID.items():
-                print(str(key) +  '\n')
+                if(key<807):
+                    print(str(key) +"  "+str(values)+ '\n')
         else:
             print("No such movie with this Keyword")
             exit(0)

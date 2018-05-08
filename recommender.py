@@ -23,8 +23,7 @@ class Recommender:
     #------if user not present in graph add to graph-----#
     def addUserToGraph(self):
 
-        if(self.userId > self.graph.ratings["userId"].unique()[-1]):
-            self.graph.bipartiteGraph = np.append(self.graph.bipartiteGraph, np.zeros((1, 807)), axis = 0)
+        self.graph.bipartiteGraph = np.append(self.graph.bipartiteGraph, np.zeros((1, 807)), axis = 0)
      
 
     #------genres dictionary------#

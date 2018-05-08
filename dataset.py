@@ -40,7 +40,7 @@ class Graph:
 
         if matfile.exists():
             self.loadMatrixToNumpyFile()
-            print('loaded file\n')
+            print('--------File Loaded-----------\n')
 
         else:
             self.bipartiteGraphUserMovie()
